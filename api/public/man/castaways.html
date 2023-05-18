@@ -1,0 +1,114 @@
+<div class="container">
+
+<a href="json/castaways.json"><h2 id="castaways">Castaways</h2></a>
+
+<h3>Description</h3>
+
+<p>A dataset containing details on the results for every castaway and season
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">castaways
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt><code>version</code></dt>
+<dd>
+<p>Country code for the version of the show</p>
+</dd>
+<dt><code>version_season</code></dt>
+<dd>
+<p>Version season key</p>
+</dd>
+<dt><code>season</code></dt>
+<dd>
+<p>Sesaon number</p>
+</dd>
+<dt><code>season_name</code></dt>
+<dd>
+<p>Season name</p>
+</dd>
+<dt><code>full_name</code></dt>
+<dd>
+<p>Full name of the castaway</p>
+</dd>
+<dt><code>castaway_id</code></dt>
+<dd>
+<p>ID of the castaway (primary key). Consistent across seasons and name changes e.g. Amber Brkich / Amber Mariano. The first two letters reference the country of the version played e.g. US, AU (TBA).</p>
+</dd>
+<dt><code>castaway</code></dt>
+<dd>
+<p>Name of castaway. Generally this is the name they were most commonly referred to
+or nickname e.g. no one called Coach, Benjamin. He was simply Coach</p>
+</dd>
+<dt><code>age</code></dt>
+<dd>
+<p>Age of the castaway during the season they played</p>
+</dd>
+<dt><code>city</code></dt>
+<dd>
+<p>City of residence during the season they played</p>
+</dd>
+<dt><code>state</code></dt>
+<dd>
+<p>State of residence during the season they played</p>
+</dd>
+<dt><code>episode</code></dt>
+<dd>
+<p>Episode number</p>
+</dd>
+<dt><code>day</code></dt>
+<dd>
+<p>Number of days the castaway survived. A missing value indicates they later returned to the game that season</p>
+</dd>
+<dt><code>order</code></dt>
+<dd>
+<p>Boot order. Order in which castaway was voted out e.g. 5 is the 5th person voted of the island</p>
+</dd>
+<dt><code>result</code></dt>
+<dd>
+<p>Final result</p>
+</dd>
+<dt><code>result_number</code></dt>
+<dd>
+<p>Result number i.e. the final place. NA for castaways that were voted out but later returned e.g. Redemption Island</p>
+</dd>
+<dt><code>jury_status</code></dt>
+<dd>
+<p>Jury status</p>
+</dd>
+<dt><code>original_tribe</code></dt>
+<dd>
+<p>Original tribe name</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>If the original <code>castaway_id</code> is desired simply extract the digits from the ID e.g.
+<code>castaway_id = as.numeric(str_extract(castaway_id, '[:digit:]+'))</code> in a mutate step.
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="json/castaways.json">https://en.wikipedia.org/wiki/Survivor_(American_TV_series)</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+castaways %&gt;%
+  filter(season == 40)
+</code></pre>
+
+
+</div>

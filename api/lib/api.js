@@ -1,4 +1,6 @@
-import fs from 'fs'
+//import fs from 'fs'
+const fs = require('fs');
+
 import { join } from 'path'
 
 const dataDir = join(process.cwd(), 'public/json/')

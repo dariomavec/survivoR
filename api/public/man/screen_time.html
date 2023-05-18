@@ -1,0 +1,89 @@
+<div class="container">
+
+<a href="json/screen_time.json"><h2 id="screen_time">Screen Time</h2></a>
+
+<h3>Description</h3>
+
+<p>A dataset summarising the screen time of contestants on the TV show Survivor.
+Currently only contains Season 1-4 and 42.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">screen_time
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt><code>version_season</code></dt>
+<dd>
+<p>Version season key</p>
+</dd>
+<dt><code>episode</code></dt>
+<dd>
+<p>Episode number</p>
+</dd>
+<dt><code>castaway_id</code></dt>
+<dd>
+<p>ID of the castaway (primary key). Also includes
+two special IDs of host (i.e. Jeff Probst) or unknown (the image detection
+couldn't identify the face with sufficient accuracy)</p>
+</dd>
+<dt><code>screen_time</code></dt>
+<dd>
+<p>Estimated screen time for the individual in seconds.</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Individuals' screen time is calculated, at a high-level, via the following process:
+</p>
+
+<ol>
+<li>
+<p> Frames are sampled from episodes on a 1 second time interval
+</p>
+</li>
+<li>
+<p> MTCNN detects the human faces within each frame
+</p>
+</li>
+<li>
+<p> VGGFace2 converts each detected face into a 512d vector space
+</p>
+</li>
+<li>
+<p> A training set of labelled images (1 for each contestant + 3 for
+Jeff Probst) is processed in the same way to determine where they sit in
+the vector space.
+TODO: This could be made more accurate by increasing the number of training
+images per contestant.
+</p>
+</li>
+<li>
+<p> The Euclidean distance is calculated for the faces detected in the frame
+to each of the contestants in the season (+Jeff). If the minimum distance is
+greater than 1.2 the face is labelled as "unknown".
+TODO: Review how robust this distance cutoff truly is - currently based on
+manual review of Season 42.
+</p>
+</li>
+<li>
+<p> A multi-class SVM is trained on the training set to label faces. For
+any face not identified as "unknown", the vector embedding is run into this
+model and a label is generated.
+</p>
+</li>
+<li>
+<p> All labelled faces are aggregated together, with an assumption of 1
+full second of screen time each time a face is seen.
+</p>
+</li>
+</ol>
+</div>

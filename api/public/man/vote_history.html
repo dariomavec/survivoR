@@ -1,0 +1,184 @@
+<div class="container">
+
+<a href="json/vote_history.json"><h2 id="vote_history">Vote history</h2></a>
+
+<h3>Description</h3>
+
+<p>A dataset containing details on the vote history for each season
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vote_history
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt><code>version</code></dt>
+<dd>
+<p>Country code for the version of the show</p>
+</dd>
+<dt><code>version_season</code></dt>
+<dd>
+<p>Version season key</p>
+</dd>
+<dt><code>season_name</code></dt>
+<dd>
+<p>The season name</p>
+</dd>
+<dt><code>season</code></dt>
+<dd>
+<p>The season number</p>
+</dd>
+<dt><code>episode</code></dt>
+<dd>
+<p>Episode number</p>
+</dd>
+<dt><code>day</code></dt>
+<dd>
+<p>Day the tribal council took place</p>
+</dd>
+<dt><code>tribe_status</code></dt>
+<dd>
+<p>The status of the tribe e.g. original, swapped, merged, etc. See details for more</p>
+</dd>
+<dt><code>tribe</code></dt>
+<dd>
+<p>Tribe name</p>
+</dd>
+<dt><code>castaway</code></dt>
+<dd>
+<p>Name of the castaway</p>
+</dd>
+<dt><code>immunity</code></dt>
+<dd>
+<p>Type of immunity held by the castaway at the time of the vote e.g. individual,
+hidden (see details for hidden immunity data)</p>
+</dd>
+<dt><code>vote</code></dt>
+<dd>
+<p>The castaway for which the vote was cast</p>
+</dd>
+<dt><code>vote_event</code></dt>
+<dd>
+<p>Extra details on the vote e.g. Won or lost the fire challenge, played an extra vote, etc</p>
+</dd>
+<dt><code>vote_event_outcome</code></dt>
+<dd>
+<p>The outcome of the vote event</p>
+</dd>
+<dt><code>split_vote</code></dt>
+<dd>
+<p>If there was a decision to split the vote this records who the vote was split with.
+Helps to identify successful boots</p>
+</dd>
+<dt><code>nullified</code></dt>
+<dd>
+<p>Was the vote nullified by a hidden immunity idol? Logical</p>
+</dd>
+<dt><code>tie</code></dt>
+<dd>
+<p>If the set of votes resulted in a tie. Logical</p>
+</dd>
+<dt><code>voted_out</code></dt>
+<dd>
+<p>The castaway who was voted out</p>
+</dd>
+<dt><code>order</code></dt>
+<dd>
+<p>Boot order. Order in which castaway was voted out e.g. 5 is the 5th person voted of the island</p>
+</dd>
+<dt><code>vote_order</code></dt>
+<dd>
+<p>In the case of ties this indicates the order the votes took place</p>
+</dd>
+<dt><code>castaway_id</code></dt>
+<dd>
+<p>ID of the castaway (primary key). Consistent across seasons and name changes e.g. Amber Brkich / Amber Mariano. The first two letters reference the country of the version played e.g. US, AU.</p>
+</dd>
+<dt><code>vote_id</code></dt>
+<dd>
+<p>ID of the castaway voted for</p>
+</dd>
+<dt><code>voted_out_id</code></dt>
+<dd>
+<p>ID of the castaway voted_out</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>This data frame contains a complete history of votes cast across all seasons of Survivor. While there are consistent
+events across the seasons there are some unique events such as the 'mutiny' in Survivor: Cook Islands (season 13)
+or the 'Outcasts' in Survivor: Pearl Islands (season 7). For maintaining a standard, whenever there has been a change
+in tribe for the castaways it has been recorded as <code>swapped</code>. <code>swapped</code> is used as the
+term since 'the tribe swap' is a typical recurring milestone in each season of Survivor. Subsequent changes are recorded with
+a trailing digit e.g. <code>swapped2</code>. This includes absorbed tribes e.g. Stephanie was 'absorbed'
+in Survivor: Palau (season 10) and when 3 tribes are
+reduced to 2. These cases are still considered 'swapped' to indicate a change in tribe status.
+</p>
+<p>Some events result in a castaway attending tribal but not voting. These are recorded as
+</p>
+
+<dl>
+<dt><code>Win</code></dt>
+<dd>
+<p>The castaway won the fire challenge</p>
+</dd>
+<dt><code>Lose</code></dt>
+<dd>
+<p>The castaway lost the fire challenge</p>
+</dd>
+<dt><code>None</code></dt>
+<dd>
+<p>The castaway did not cast a vote. This may be due to a vote steal or some other means</p>
+</dd>
+<dt><code>Immune</code></dt>
+<dd>
+<p>The castaway did not vote but were immune from the vote</p>
+</dd>
+</dl>
+<p>Where a castaway has <code>immunity == 'hidden'</code> this means that player is protected by a hidden immunity idol. It may not
+necessarily mean they played the idol, the idol may have been played for them. While the nullified votes data is complete
+the <code>immunity</code> data does not include those who had immunity but did not receive a vote. This is a TODO.
+</p>
+<p>In the case where the 'steal a vote' advantage was played, there is a second row for the castaway that stole the vote.
+The castaway who had their vote stolen are is recorded as <code>None</code>.
+</p>
+<p>Many castaways have been medically evacuated, quit or left the game for some other reason. In these cases where no votes
+were cast there is a skip in the <code>order</code> variable. Since no votes were cast there is nothing to record on this
+data frame. The correct order in which castaways departed the island is recorded on <code>castaways</code>.
+</p>
+<p>In the case of a tie, <code>voted_out</code> is recorded as <code>tie</code> to indicate no one was voted off the island in that
+instance. The re-vote is recorded with <code>vote_order = 2</code> to indicate this is the second round of voting. In
+the case of a second tie <code>voted_out</code> is recorded as <code>tie2</code>. The third step is either a draw of rocks,
+fire challenge or countback (in the early days of survivor). In these cases <code>vote</code> is recorded as the colour of the
+rock drawn, result of the fire challenge or 'countback'.
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="json/vote_history.json">https://en.wikipedia.org/wiki/Survivor_(American_TV_series)</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># The number of times Tony voted for each castaway in Survivor: Winners at War
+library(dplyr)
+vote_history %&gt;%
+  filter(
+    season == 40,
+    castaway == "Tony"
+  ) %&gt;%
+  count(vote)
+</code></pre>
+
+
+</div>

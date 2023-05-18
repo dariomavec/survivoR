@@ -1,0 +1,69 @@
+<div class="container">
+
+<a href="json/advantage_details.json"><h2 id="advantage_details">Advantage Details</h2></a>
+
+<h3>Description</h3>
+
+<p>A dataset containing the details and characteristics of each idol and advantage. This maps to 'advantage_movement'
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">advantage_details
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt><code>version</code></dt>
+<dd>
+<p>Country code for the version of the show</p>
+</dd>
+<dt><code>version_season</code></dt>
+<dd>
+<p>Version season key</p>
+</dd>
+<dt><code>season_name</code></dt>
+<dd>
+<p>The season name</p>
+</dd>
+<dt><code>season</code></dt>
+<dd>
+<p>The season number</p>
+</dd>
+<dt><code>advantage_id</code></dt>
+<dd>
+<p>The ID / primary key of the advantage</p>
+</dd>
+<dt><code>advantage_type</code></dt>
+<dd>
+<p>Advantage type e.g. hidden immunity idol, extra vote, steal a vote, etc</p>
+</dd>
+<dt><code>clue_details</code></dt>
+<dd>
+<p>Details if a clue existed for the advantage and if so where was the clue found</p>
+</dd>
+<dt><code>location_found</code></dt>
+<dd>
+<p>The location the idol or advantage was found</p>
+</dd>
+<dt><code>conditions</code></dt>
+<dd>
+<p>Extra details about the unique conditions of the idol or advantage</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>There are split idols which need to be combined to be played. In these case the first one found is
+given an ID. The second or subsequent parts are given the same ID with a trailing letter. For example in season 40
+Denise found an idol that was split (USHI4002). Later she found the other half (USHI4002b). When played the second half is
+considered to have 'absorbed' into the first idol. The first idol found is always considered the primary idol.
+</p>
+
+
+</div>

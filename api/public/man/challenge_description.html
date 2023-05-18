@@ -1,0 +1,109 @@
+<div class="container">
+
+<a href="json/challenge_description.json"><h2 id="challenge_description">Challenge Description</h2></a>
+
+<h3>Description</h3>
+
+<p>A dataset detailing the challenges played and the elements they include over all seasons of Survivor
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">challenge_description
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt><code>challenge_id</code></dt>
+<dd>
+<p>Primary key</p>
+</dd>
+<dt><code>challenge_name</code></dt>
+<dd>
+<p>The name of the challenge. Challenges can go by different names but where possible
+recurring challenges are kept consistent. While there are tweaks to the challenges where the main components of
+the challenge consistent they share the same name</p>
+</dd>
+<dt><code>puzzle</code></dt>
+<dd>
+<p>If the challenge contains a puzzle element</p>
+</dd>
+<dt><code>race</code></dt>
+<dd>
+<p>If the challenge is a race between tribes, teams or individuals</p>
+</dd>
+<dt><code>precision</code></dt>
+<dd>
+<p>If the challenge contains a precision element e.g. shooting an arrow, hitting a target, etc</p>
+</dd>
+<dt><code>endurance</code></dt>
+<dd>
+<p>If the challenge is an endurance event e.g. last tribe, team, individual standing</p>
+</dd>
+<dt><code>strength</code></dt>
+<dd>
+<p>If the challenge has a strength based</p>
+</dd>
+<dt><code>turn_based</code></dt>
+<dd>
+<p>If the challenge is turn bases i.e. conducted in rounds</p>
+</dd>
+<dt><code>balance</code></dt>
+<dd>
+<p>If the challenge contains a balancing element. My refer to the player balancing on something or
+the player balancing an object on something e.g. The Ball Drop</p>
+</dd>
+<dt><code>food</code></dt>
+<dd>
+<p>If the challenge contains a food element e.g. the food challenge, biting off chunks of meat</p>
+</dd>
+<dt><code>knowledge</code></dt>
+<dd>
+<p>If the challenge contains a knowledge component e.g. Q and A about the location</p>
+</dd>
+<dt><code>memory</code></dt>
+<dd>
+<p>If the challenge contains a memory element e.g. memorising a sequence of items</p>
+</dd>
+<dt><code>fire</code></dt>
+<dd>
+<p>If the challenge contains an element of fire making / maintaining</p>
+</dd>
+<dt><code>water</code></dt>
+<dd>
+<p>If the challenge is held, in part, in the water</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The features of each challenge have been determined largely through string searches of key words or phraces in the
+challenge description. It may not capture the full essence of the challenge but on the whole will provide a good basis for
+analysis.
+</p>
+<p>Please log any suggested corrections at <a href="json/challenge_description.json">https://github.com/doehm/survivoR</a>
+</p>
+<p>For updated data please see the git version.
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="json/challenge_description.json">https://survivor.fandom.com/wiki/Category:Challenges</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+library(tidyr)
+challenge_description
+</code></pre>
+
+
+</div>

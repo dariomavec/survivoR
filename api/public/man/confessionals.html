@@ -1,0 +1,92 @@
+<div class="container">
+
+<a href="json/confessionals.json"><h2 id="confessionals">Confessionals</h2></a>
+
+<h3>Description</h3>
+
+<p>A dataset containing the count of confessionals per castaway per episode. A confessional is when
+the castaway is speaking directly to the camera about their game.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">confessionals
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt><code>version</code></dt>
+<dd>
+<p>Country code for the version of the show</p>
+</dd>
+<dt><code>version_season</code></dt>
+<dd>
+<p>Version season key</p>
+</dd>
+<dt><code>season_name</code></dt>
+<dd>
+<p>The season name</p>
+</dd>
+<dt><code>season</code></dt>
+<dd>
+<p>The season number</p>
+</dd>
+<dt><code>episode</code></dt>
+<dd>
+<p>Episode number</p>
+</dd>
+<dt><code>castaway</code></dt>
+<dd>
+<p>Name of the castaway</p>
+</dd>
+<dt><code>castaway_id</code></dt>
+<dd>
+<p>ID of the castaway (primary key). Consistent across seasons and name changes e.g. Amber Brkich / Amber Mariano. The first two letters reference the country of the version played e.g. US, AU.</p>
+</dd>
+<dt><code>confessional_count</code></dt>
+<dd>
+<p>The count of confessionals for the castaway during the episode</p>
+</dd>
+<dt><code>confessional_time</code></dt>
+<dd>
+<p>The total time for all confessionals for the episode for each castaway</p>
+</dd>
+<dt><code>index_count</code></dt>
+<dd>
+<p>The index based on the confessional counts. See details.</p>
+</dd>
+<dt><code>index_time</code></dt>
+<dd>
+<p>The index based on the confessional time. See details.</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Confessional data has been counted by contributors of the survivoR R package and consolidated
+with external sources. The aim is to establish consistency in confessional counts in the absence of official
+sources. Given the subjective nature of the counts and the potential for clerical error no single source is
+more valid than another. Therefore, it is reasonable to average across all sources.
+</p>
+<p>In the case of double or extended episodes, if the episode only has one title it is considered a single episode. This
+means the average number of confessionals per person is likely to be higher for this episode given it's length. If
+there are two episode titles the confessionals are counted for the appropriate episode. This is to ensure consistency
+across all other datasets.
+</p>
+<p>In the case of recap episodes, this episode is left blank.
+</p>
+<p>The indexes are a measure of how many more confessional counts or time the castaway has received given the point in the game.
+For example a 'index_count' of 1 implies the castaway has received the expected number of confessionals given equal share within tribe.
+An index of 1.5 implies have have received 50
+typically receives more confessionals for the episode. Makes sense. 'index_time' is the same but using time instead of counts.
+</p>
+<p>If you also count confessionals, please get in touch and I'll add them into the package.
+</p>
+
+
+</div>

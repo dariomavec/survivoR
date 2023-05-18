@@ -1,0 +1,95 @@
+<div class="container">
+
+<a href="json/castaway_details.json"><h2 id="castaway_details">Castaway details</h2></a>
+
+<h3>Description</h3>
+
+<p>A dataset containing details on the castaways for each season
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">castaway_details
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt><code>castaway_id</code></dt>
+<dd>
+<p>ID of the castaway (primary key). Consistent across seasons and name changes e.g. Amber Brkich / Amber Mariano. The first two letters reference the country of the version played e.g. US, AU (TBA).</p>
+</dd>
+<dt><code>full_name</code></dt>
+<dd>
+<p>Full name of the castaway</p>
+</dd>
+<dt><code>full_name_detailed</code></dt>
+<dd>
+<p>A detailed version of full_name for plotting e.g. 'Boston' Rob Mariano</p>
+</dd>
+<dt><code>castaway</code></dt>
+<dd>
+<p>Short name of the castaway. Name typically used during the season. Sometimes there are multiple
+people with the same name e.g. Rob C and Rob M in Survivor All-Stars. This field takes the most verbose name used</p>
+</dd>
+<dt><code>date_of_birth</code></dt>
+<dd>
+<p>Date of birth</p>
+</dd>
+<dt><code>date_of_death</code></dt>
+<dd>
+<p>Date of death</p>
+</dd>
+<dt><code>gender</code></dt>
+<dd>
+<p>Gender of castaway</p>
+</dd>
+<dt><code>poc</code></dt>
+<dd>
+<p>POC indicator if known and can point to a source, else marked as white. It is understood this is a contentious issue and ultimately up to the individual as to how they wish to be identified. Please log corrections on the Github page.</p>
+</dd>
+<dt><code>race</code></dt>
+<dd>
+<p>Race (if known)</p>
+</dd>
+<dt><code>ethnicity</code></dt>
+<dd>
+<p>Ethnicity (if known)</p>
+</dd>
+<dt><code>occupation</code></dt>
+<dd>
+<p>Occupation</p>
+</dd>
+<dt><code>personality_type</code></dt>
+<dd>
+<p>The Myer-Briggs personality type of the castaway</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Race and ethnicity data is included if known and can point to a source, rather than making an assumption
+about an individual.
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="json/castaway_details.json">https://survivor.fandom.com/wiki/Main_Page</a>,
+<a href="json/castaway_details.json">https://www.personality-database.com/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+castaway_details |&gt;
+  count(gender)
+</code></pre>
+
+
+</div>

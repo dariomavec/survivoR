@@ -1,0 +1,89 @@
+<div class="container">
+
+<a href="json/tribe_colours.json"><h2 id="tribe_colours">Tribe colours</h2></a>
+
+<h3>Description</h3>
+
+<p>A dataset containing the tribe colours for each season
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">tribe_colours
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt><code>version</code></dt>
+<dd>
+<p>Country code for the version of the show</p>
+</dd>
+<dt><code>version_season</code></dt>
+<dd>
+<p>Version season key</p>
+</dd>
+<dt><code>season_name</code></dt>
+<dd>
+<p>The season name</p>
+</dd>
+<dt><code>season</code></dt>
+<dd>
+<p>The season number</p>
+</dd>
+<dt><code>tribe</code></dt>
+<dd>
+<p>Tribe name</p>
+</dd>
+<dt><code>tribe_colour</code></dt>
+<dd>
+<p>Colour of the tribe</p>
+</dd>
+<dt><code>tribe_status</code></dt>
+<dd>
+<p>Tribe status e.g. original, swapped or merged. In the instance where a tribe is formed at the swap by
+splitting 2 tribes into 3, the 3rd tribe will be labelled 'swapped'</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="json/tribe_colours.json">https://survivor.fandom.com/wiki/Tribe</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ggplot2)
+library(dplyr)
+library(forcats)
+df &lt;- tribe_colours %&gt;%
+  group_by(season_name) %&gt;%
+  mutate(
+    xmin = 1,
+    xmax = 2,
+    ymin = 1:n(),
+    ymax = ymin + 1
+  ) %&gt;%
+  ungroup() %&gt;%
+  mutate(
+    season_name = fct_reorder(season_name, season),
+    font_colour = ifelse(tribe_colour == "#000000", "white", "black")
+  )
+ggplot() +
+  geom_rect(data = df,
+    mapping = aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+    fill = df$tribe_colour) +
+  geom_text(data = df,
+    mapping = aes(x = xmin+0.5, y = ymin+0.5, label = tribe),
+    colour = df$font_colour) +
+  theme_void() +
+  facet_wrap(~season_name, scales = "free_y")
+</code></pre>
+
+
+</div>

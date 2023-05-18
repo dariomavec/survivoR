@@ -1,43 +1,47 @@
+import { join } from 'path'
 const fs = require('fs');
+import Link from 'next/link';
+import Head from "next/head";
 
+// getStaticProps only runs in the Node side, so it is safe
+// to use libraries from Node here
+export async function getStaticProps() {
+  const dataDir = join(process.cwd(), 'public/json/')
+  const dataSets = fs.readdirSync(dataDir).map(
+    (dataSet) => dataSet.replace(/\.json/g, "")
+  );
 
-const findFiles = function (dir, pattern) {
-  var results = [];
-  fs.readdirSync('../public/json/').forEach(function (file) {
-      file = path.resolve(dir, file);
-      var stat = fs.statSync(file);
-      if (stat.isDirectory()) {
-          results = results.concat(findFile(file, pattern));
-      }
-      if (stat.isFile() && file.endsWith(pattern)) {
-          results.push(file);
-      }
-  });
-  return results;
-};
+  const mans = dataSets.map(
+    (dataset) => fs.readFileSync(join(process.cwd(), 'public/man/', dataset + ".html"), 'utf8')
+  );
 
-export default function Index() {
-  const heroPost = edges[0]?.node
+  return {
+    props: {
+      dataSets: dataSets,
+      mans: mans
+    }
+  };
+}
 
+export default function Index({ dataSets, mans }) {
   return (
-    <Layout preview={preview}>
-      <Head>
-        <title>{`Next.js Blog Example with ${CMS_NAME}`}</title>
-      </Head>
-      <Container>
-        <Intro />
-        {heroPost && (
-          <HeroPost
-            title={heroPost.title}
-            coverImage={heroPost.featuredImage}
-            date={heroPost.date}
-            author={heroPost.author}
-            slug={heroPost.slug}
-            excerpt={heroPost.excerpt}
-          />
-        )}
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-      </Container>
-    </Layout>
+    <>
+    <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </Head>
+
+    {<div class = "row">
+      {mans.map((man, idx) => (
+        <div class="col-sm-3" style = {{ padding: "16px" }} > 
+          <div class = "card" key = {idx} style = {{ 
+            height: "500px", 
+            overflowY: "scroll"
+            }}>
+            <div class = "card-body" dangerouslySetInnerHTML={{ __html: man }}></div>
+          </div>
+        </div>
+      ))}
+    </div>}
+  </>
   )
 }

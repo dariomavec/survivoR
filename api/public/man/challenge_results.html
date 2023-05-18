@@ -1,0 +1,111 @@
+<div class="container">
+
+<a href="json/challenge_results.json"><h2 id="challenge_results">Challenge Results</h2></a>
+
+<h3>Description</h3>
+
+<p>A dataset detailing the challenges played including reward and immunity challenges.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">challenge_results
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns
+</p>
+
+<dl>
+<dt><code>version</code></dt>
+<dd>
+<p>Country code for the version of the show</p>
+</dd>
+<dt><code>version_season</code></dt>
+<dd>
+<p>Version season key</p>
+</dd>
+<dt><code>season_name</code></dt>
+<dd>
+<p>The season name</p>
+</dd>
+<dt><code>season</code></dt>
+<dd>
+<p>The season number</p>
+</dd>
+<dt><code>episode</code></dt>
+<dd>
+<p>Episode number</p>
+</dd>
+<dt><code>n_boots</code></dt>
+<dd>
+<p>The number of boots that there have been in the game e.g. if 'n_boots == 2' there have been 2
+boots in the game so far and there are N-2 castaways left in the game</p>
+</dd>
+<dt><code>castaway_id</code></dt>
+<dd>
+<p>ID of the castaway (primary key). Consistent across seasons and name changes e.g. Amber Brkich / Amber Mariano. The first two letters reference the country of the version played e.g. US, AU (TBA).</p>
+</dd>
+<dt><code>castaway</code></dt>
+<dd>
+<p>Name of castaway. Generally this is the name they were most commonly referred to
+or nickname e.g. no one called Coach, Benjamin. He was simply Coach</p>
+</dd>
+<dt><code>challenge_name</code></dt>
+<dd>
+<p>The name of the challenge. Challenges can go by different names but where possible
+recurring challenges are kept consistent. While there are tweaks to the challenges where the main components of
+the challenge consistent they share the same name</p>
+</dd>
+<dt><code>outcome_type</code></dt>
+<dd>
+<p>Whether the challenge is individual or tribal. Some individual reward challenges may involve multiple castawats as the winner gets to choose who they bring along</p>
+</dd>
+<dt><code>tribe</code></dt>
+<dd>
+<p>Current tribe the castaway is on</p>
+</dd>
+<dt><code>tribe_status</code></dt>
+<dd>
+<p>The status of the tribe e.g. original, swapped, merged, etc. See details for more</p>
+</dd>
+<dt><code>challenge_type</code></dt>
+<dd>
+<p>The challenge type e.g. immunity, reward, etc</p>
+</dd>
+<dt><code>challenge_id</code></dt>
+<dd>
+<p>Primary key to the <code>challenge_description</code> data set which contains features of the challenge</p>
+</dd>
+<dt><code>result</code></dt>
+<dd>
+<p>Result of challenge</p>
+</dd>
+<dt><code>chosen_for_reward</code></dt>
+<dd>
+<p>If after the reward challenge the castaway was chosen to participate in the reward</p>
+</dd>
+<dt><code>sit_out</code></dt>
+<dd>
+<p><code>TRUE</code> if they sat out of the challenge or <code>FALSE</code> if they participate</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="json/challenge_results.json">https://en.wikipedia.org/wiki/Survivor_(American_TV_series)</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+library(tidyr)
+challenge_results %&gt;%
+  filter(season == 40)
+</code></pre>
+
+
+</div>

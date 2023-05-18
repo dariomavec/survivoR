@@ -1,0 +1,76 @@
+<div class="container">
+
+<a href="json/jury_votes.json"><h2 id="jury_votes">Jury votes</h2></a>
+
+<h3>Description</h3>
+
+<p>A dataset containing details on the final jury votes to determine the winner for each season
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">jury_votes
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt><code>version</code></dt>
+<dd>
+<p>Country code for the version of the show</p>
+</dd>
+<dt><code>version_season</code></dt>
+<dd>
+<p>Version season key</p>
+</dd>
+<dt><code>season_name</code></dt>
+<dd>
+<p>The season name</p>
+</dd>
+<dt><code>season</code></dt>
+<dd>
+<p>The season number</p>
+</dd>
+<dt><code>castaway</code></dt>
+<dd>
+<p>Name of the castaway</p>
+</dd>
+<dt><code>finalist</code></dt>
+<dd>
+<p>The finalists for which a vote can be placed</p>
+</dd>
+<dt><code>vote</code></dt>
+<dd>
+<p>Vote. 0-1 variable for easy summation</p>
+</dd>
+<dt><code>castaway_id</code></dt>
+<dd>
+<p>ID of the castaway (primary key). Consistent across seasons and name changes e.g. Amber Brkich / Amber Mariano. The first two letters reference the country of the version played e.g. US, AU.</p>
+</dd>
+<dt><code>finalist_id</code></dt>
+<dd>
+<p>The ID of the finalist for which a vote can be placed. Consistent with castaway ID</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="json/jury_votes.json">https://en.wikipedia.org/wiki/Survivor_(American_TV_series)</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+jury_votes %&gt;%
+  filter(season == 40) %&gt;%
+  group_by(finalist) %&gt;%
+  summarise(votes = sum(vote))
+</code></pre>
+
+
+</div>
